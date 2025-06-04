@@ -1,0 +1,25 @@
+name: My First Self-Hosted Runner Workflow
+
+on:
+  push:
+    branches:
+      - main # Runs when you push to the main branch
+  workflow_dispatch: # Allows manual triggering from the Actions tab
+
+jobs:
+  say_hello_on_self_hosted_runner:
+    name: Greet from EC2 Runner
+    runs-on: self-hosted # CRITICAL: This tells GitHub to use your self-hosted runner
+
+    steps:
+      - name: Check out code (optional for this simple test)
+        uses: actions/checkout@v4 
+        # We're not using the code in this step, but it's good practice to include checkout
+
+      - name: Print a greeting and some info
+        run: |
+          echo "Hello from my self-hosted runner on AWS EC2!"
+          echo "My hostname is: $(hostname)"
+          echo "I am running in directory: $(pwd)"
+          echo "Here are the files in my workspace:"
+          ls -la
