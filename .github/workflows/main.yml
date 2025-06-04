@@ -23,3 +23,12 @@ jobs:
           echo "I am running in directory: $(pwd)"
           echo "Here are the files in my workspace:"
           ls -la
+          
+      - name: Use the secret
+        env:
+          SUPER_SECRET: ${{ secrets.MY_EXAMPLE_SECRET }}
+        run: |
+          echo "Attempting to use the secret..."
+          echo "The secret value is: $SUPER_SECRET" 
+          echo "Notice above if GitHub Actions masked the secret value in the logs."
+          echo "Length of secret: ${#SUPER_SECRET}"
